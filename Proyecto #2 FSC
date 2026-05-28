@@ -9,3 +9,5 @@ import ujson
 
 # CONFIGURACIÓN DE PINES
 potenciometro = machine.ADC( )
+
+# Segmentos a, b, c, d, e, f, g
