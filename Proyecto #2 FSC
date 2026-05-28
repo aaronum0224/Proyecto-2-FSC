@@ -1,1 +1,11 @@
-"Proyecto #2"
+#main.py - Raspberry Pi Pico W
+#CElect - Máquina dispensadora
+
+import machine 
+import utime
+import network
+import usocket
+import ujson
+
+# CONFIGURACIÓN DE PINES
+potenciometro = machine.ADC( )
