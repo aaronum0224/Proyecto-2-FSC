@@ -7,7 +7,11 @@ import network
 import usocket
 import ujson
 
+inventario = [7, 3, 5] # máx 9
+
 # CONFIGURACIÓN DE PINES
-potenciometro = machine.ADC( )
+potenciometro = machine.ADC(26)
+
+
 
 # Segmentos a, b, c, d, e, f, g
