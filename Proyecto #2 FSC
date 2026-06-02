@@ -22,13 +22,13 @@ inventario = [7, 3, 5] # máx 9
 potenciometro = machine.ADC(26)
 
 def leer_producto():
-valor = potenciometro.read_u16()
-if valor < 21845:
-  return 0
-elif valor < 43690:
-  return 1
-else:
-  return 2
+  valor = potenciometro.read_u16()
+  if valor < 21845:
+    return 0
+  elif valor < 43690:
+    return 1
+  else:
+    return 2
 
 
 
@@ -51,9 +51,9 @@ DIGITOS = {
 }
 
 def mostrar_digito(n):
-patron = DIGITOS.get(n, [0,0,0,0,0,0,0]9
-for i, seg in enumerate(SEGMENTOS):
-  seg.value
+    patron = DIGITOS.get(n, [0,0,0,0,0,0,0])
+    for i, seg in enumerate(SEGMENTOS):
+        seg.value(patron[i])
 
 
 # SERVO
@@ -63,14 +63,18 @@ servo_pwm = machine.PWM(machine.Pin(10))
 servo_pwm.freq(50)
 
 def mover_servo(angulo):
-  pulso_ns = int((angulo / 180) * 1_000_000 + 1_000_000)
-  servo_pwm.duty_ns(pulse_ns)
+    # pulso entre 1ms (1_000_000 ns) y 2ms (2_000_000 ns)
+    pulso_ns = int(1_000_000 + (angulo / 180) * 1_000_000)
+    servo_pwm.duty_ns(pulso_ns)
 
 def abrir_compuerta():
   mover_servo(90)         # Abrir
   utime.sleep(2)          # Esperar 2 segundos
   mover_servo(0)          # Cerrar
-  
+
+
+
+#======================================================================
 #VIDEO YOUTUBE
 from machine import Pin, ADC, PWM     #Importamos librerías   
 import time                                
