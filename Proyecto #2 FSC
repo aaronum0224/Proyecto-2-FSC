@@ -15,21 +15,30 @@ import ujson       # Serialización JSON ligera para MicroPython
 inventario = [7, 3, 5] # máx 9
 
 
-
+#=============================================================================
 # POTENCIÓMETRO 
 # selección de los productos
+from machine import Pin, ADC, PWM     #Importamos librerías   
+import time                                
 
-potenciometro = machine.ADC(26)
+LED = PWM(Pin(15))     # Declaramos el pin 15 como PWM
+LED.freq(1000)     # 1000Hz
 
-def leer_producto():
-  valor = potenciometro.read_u16()
-  if valor < 21845:
-    return 0
-  elif valor < 43690:
-    return 1
-  else:
-    return 2
+POT = ADC(26)     #Declaramos la variable para la lectura analógica pin 26
 
+while True: #Bucle infinito
+    
+  Valor = POT.read_u16()      # Almacenamos los valores leídos de nuestro potenciómetro en la variable "Valor"
+                              #que serán de 0 a 65535
+  
+  porcentaje = round(Valor/65535*100) #Redondeamos los valores de 0 a 100
+  
+  print("Valor de 0 a 100:" ,porcentaje,"%") # Imprimimos los valores almacenados en la variable "porcentaje"
+  
+  
+  LED.duty_u16(Valor)         # Establesemos el valor del ciclo de trabajo como el del valor del potenciómetro
+  time.sleep(0.25)            # Le damos un diempo de 250msdef mover_servo(angulo):
+#=============================================================================
 
 
 # 7 SEGMENTOS
@@ -74,26 +83,4 @@ def abrir_compuerta():
 
 
 
-#======================================================================
-#VIDEO YOUTUBE
-from machine import Pin, ADC, PWM     #Importamos librerías   
-import time                                
 
-LED = PWM(Pin(15))     # Declaramos el pin 15 como PWM
-LED.freq(1000)     # 1000Hz
-
-POT = ADC(26)     #Declaramos la variable para la lectura analógica pin 26
-
-while True: #Bucle infinito
-    
-  Valor = POT.read_u16()      # Almacenamos los valores leídos de nuestro potenciómetro en la variable "Valor"
-                              #que serán de 0 a 65535
-  
-  porcentaje = round(Valor/65535*100) #Redondeamos los valores de 0 a 100
-  
-  print("Valor de 0 a 100:" ,porcentaje,"%") # Imprimimos los valores almacenados en la variable "porcentaje"
-  
-  
-  LED.duty_u16(Valor)         # Establesemos el valor del ciclo de trabajo como el del valor del potenciómetro
-  
-  time.sleep(0.25)            # Le damos un diempo de 250msdef mover_servo(angulo):
