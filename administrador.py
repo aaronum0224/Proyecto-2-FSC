@@ -234,7 +234,7 @@ def loop_actualizacion(root):
             nuevo_inv = datos.get('inventario', [0, 0, 0])
             mantenimiento = datos.get('mantenimiento', False)
 
-            # Detectar ventas: stock bajó → alguien compró
+            # Detectar ventas: stock bajó -> alguien compró
             if inventario_prev is not None:
                 for i in range(3):
                     diff = inventario_prev[i] - nuevo_inv[i]
